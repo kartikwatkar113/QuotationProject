@@ -190,7 +190,7 @@ nav ul li a:hover {
 		<nav>
 			<ul>
 				<li><a href="dashBoard">Dashboard</a></li>
-				<li><a href="quote_form.jsp">Create Quote</a></li>
+				<li><a href="goForQuote">Create Quote</a></li>
 
 			</ul>
 		</nav>
@@ -201,38 +201,36 @@ nav ul li a:hover {
 		<div class="kanban-column draft">
 			<h3>Draft</h3>
 			<div class="kanban-cards">
-				<div class="kanban-card">
-					<h4>Quote #1234</h4>
-					<p>
-						<strong>Customer:</strong> John Doe
-					</p>
-					<p>
-						<strong>Amount:</strong> $1,000
-					</p>
-					<p>
-						<strong>Status:</strong> Draft
-					</p>
-					<button class="view-btn">View Details</button>
-					<!-- Send button added -->
-					<button class="send-btn">Send</button>
-				</div>
-				<div class="kanban-card">
-					<h4>Quote #5678</h4>
-					<p>
-						<strong>Customer:</strong> Alice Johnson
-					</p>
-					<p>
-						<strong>Amount:</strong> $750
-					</p>
-					<p>
-						<strong>Status:</strong> Draft
-					</p>
-					<button class="view-btn">View Details</button>
-					<!-- Send button added -->
-					<button class="send-btn">Send</button>
-				</div>
+				<!-- Loop through qDetails and create Kanban cards using c:forEach -->
+				<c:forEach var="quote" items="${qDetails}">
+					<div class="kanban-card">
+						<h4>
+							Quote #
+							<c:out value="${quote.quoteID}" />
+						</h4>
+						<p>
+							<strong>Customer:</strong>
+							<c:out value="${quote.custName}" />
+						</p>
+						<p>
+							<strong>Amount:</strong>  Rs.
+							<c:out value="${quote.amount}" />
+						</p>
+						<p>
+							<strong>Status:</strong>
+							<c:out value="${quote.status}" />
+						</p>
+						<a
+							href="goToFullDetails?quoteID=<c:out value='${quote.quoteID}' />" style="text-decoration: none">
+							<button class="view-btn">View Details</button>
+						</a>
+						<!-- Send button added -->
+						<button class="send-btn">Send</button>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
+
 
 		<!-- Sent Quotes Column -->
 		<div class="kanban-column sent">
