@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mvc.qp.model.CustomerModel;
+import mvc.qp.model.KPIsModel;
 import mvc.qp.model.KanbanViewModel;
 import mvc.qp.model.ProductModel;
+import mvc.qp.model.QuotationFinalDetailModel;
 import mvc.qp.model.QuoteForm;
 import mvc.qp.repository.QuotationRepo;
 
@@ -42,8 +44,55 @@ public class QuotationService {
 	}
 	
 	
-	public QuoteForm getSelectedQuotation(int quoteID) {
+	
+	public List<KanbanViewModel> getAllSendQuotations() {
+		return quotationRepo.getAllSendQuotations();
+	}
+	
+	public List<KanbanViewModel> getAllAcceptedQuotations() {
+		return quotationRepo.getAllAcceptedQuotations();
+	}
+	
+	public List<KanbanViewModel> getAllRejectedQuotations() {
+		return quotationRepo.getAllRejectedQuotations();
+	}
+	
+	public boolean setDraftToSend(int quoteID) {
+		
+		return quotationRepo.setDraftToSend(quoteID);
+	}
+	
+	
+	
+	public boolean setSendToAccept(int quoteID) {
+		
+		return quotationRepo.setSendToAccept(quoteID);
+	}
+
+
+	public boolean setDraftToReject(int quoteID) {
+	
+		return quotationRepo.setDraftToReject(quoteID);
+	}
+	
+	public QuotationFinalDetailModel getSelectedQuotation(int quoteID) {
 		return quotationRepo.getSelectedQuotation(quoteID);
 	}
+	
+	
+	
+	//now we are goin to fetch counts
+	public KPIsModel getkPIsModel(){
+		return quotationRepo.getkPIsModel();
+	}
+	
+	
+	//get all quotation list
+	
+	public List<QuotationFinalDetailModel> getQuoteList(){
+		return quotationRepo.getQuoteList();
+		
+	}
+	
 	
 }

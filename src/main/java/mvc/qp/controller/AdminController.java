@@ -28,13 +28,7 @@ public class AdminController {
 	@RequestMapping("/")
 	public String goToDashBoard(Model model) {
 
-		return "AdminDashboard";
-	}
-
-	@RequestMapping("/dashBoard")
-	public String goToDashBoardAgain(Model model) {
-
-		return "AdminDashboard";
+		return "redirect:/kanbanView";
 	}
 
 	// quote form

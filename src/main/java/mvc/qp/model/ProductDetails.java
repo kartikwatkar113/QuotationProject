@@ -6,6 +6,15 @@ public class ProductDetails {
 	private int qty;
 	private double rate;
 	private double amount;
+	private String proName;
+
+	public String getProName() {
+		return proName;
+	}
+
+	public void setProName(String proName) {
+		this.proName = proName;
+	}
 
 	public String getProductId() {
 		return productId;
@@ -41,7 +50,9 @@ public class ProductDetails {
 
 	@Override
 	public String toString() {
-		return "ProductDetails [productId=" + productId + ", qty=" + qty + ", rate=" + rate + ", amount="
-				+ amount + "]";
+		return "ProductDetails [productId=" + productId + ", qty=" + qty + ", rate=" + rate + ", amount=" + amount
+				+ ", proName=" + proName + "]";
 	}
+
+	
 }
