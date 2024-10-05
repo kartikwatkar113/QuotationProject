@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mvc.qp.model.CustomerModel;
+import mvc.qp.model.KanbanViewModel;
 import mvc.qp.model.ProductModel;
 import mvc.qp.model.QuoteForm;
 import mvc.qp.repository.QuotationRepo;
@@ -33,6 +34,16 @@ public class QuotationService {
 	public boolean setQuotationFormDetails(QuoteForm quote){
 		return quotationRepo.setQuotationFormDetails(quote);
 		
+	}
+
+	public List<KanbanViewModel> getAllQuotations() {
+	
+		return quotationRepo.getAllQuotations();
+	}
+	
+	
+	public QuoteForm getSelectedQuotation(int quoteID) {
+		return quotationRepo.getSelectedQuotation(quoteID);
 	}
 	
 }

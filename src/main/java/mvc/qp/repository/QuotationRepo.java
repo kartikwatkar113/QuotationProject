@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import mvc.qp.model.CustomerModel;
+import mvc.qp.model.KanbanViewModel;
+import mvc.qp.model.ProductDetails;
 import mvc.qp.model.ProductModel;
 import mvc.qp.model.QuoteForm;
 
@@ -118,6 +120,14 @@ public class QuotationRepo {
 				}
 				
 			},custID,quoteDate,status,discount,subtotal,grandTotal);
+			
+			String sql1="insert into lineitem(quote_id,product_id,qty,rate,amount) values(?,?,?,?,?)";
+			
+			for(ProductDetails prod:quote.getProducts()) {
+				int res=jdbcTemplate.update(sql1,quoteID,prod.getProductId(),prod.getqty(),prod.getRate(),prod.getAmount());
+				System.out.println(res);
+			}
+
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
@@ -129,5 +139,32 @@ public class QuotationRepo {
 	
 	
 	
+	public List<KanbanViewModel> getAllQuotations() {
+		String sql="select q.quote_id,c.name,q.grand_total,q.status from quote q inner join customer c on q.customer_id=c.id where q.status='Draft'";
+		List<KanbanViewModel> getAllQuotations=null;
+		try {
+			getAllQuotations=jdbcTemplate.query(sql, new RowMapper<KanbanViewModel>() {
+
+				@Override
+				public KanbanViewModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+					KanbanViewModel getit=new KanbanViewModel();
+					getit.setQuoteID(rs.getInt(1));
+					getit.setCustName(rs.getString(2));
+					getit.setAmount(rs.getDouble(3));
+					getit.setStatus(rs.getString(4));
+					return getit;
+				}
+				
+			});
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return getAllQuotations;
+	}
 	
+	
+	public QuoteForm getSelectedQuotation(int quoteID) {
+		
+		return null;
+	}	
 }

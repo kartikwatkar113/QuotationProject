@@ -76,7 +76,7 @@ public class AdminController {
 		//productService.saveQuote(quote, quoteProducts);
 
 		// Return a view or redirect after processing the quote
-		return "redirect:/quotes"; // Redirect to another page after successful submission
+		return "redirect:/kanbanView"; // Redirect to another page after successful submission
 	}
 
 
@@ -104,8 +104,5 @@ public class AdminController {
 		return response;
 	}
 
-	@RequestMapping("/kanbanView")
-	public String kanbanView() {
-		return "KanbanView";
-	}
+
 }
