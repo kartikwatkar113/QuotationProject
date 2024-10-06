@@ -4,8 +4,7 @@ public class KanbanViewModel {
 
 	private int quoteID;
 	private String custName;
-	private double amount;
-	private String status;
+	private String custaddress;
 	public int getQuoteID() {
 		return quoteID;
 	}
@@ -18,21 +17,18 @@ public class KanbanViewModel {
 	public void setCustName(String custName) {
 		this.custName = custName;
 	}
-	public double getAmount() {
-		return amount;
+	public String getCustaddress() {
+		return custaddress;
 	}
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setCustaddress(String custaddress) {
+		this.custaddress = custaddress;
 	}
 	@Override
 	public String toString() {
-		return "KanbanViewModel [quoteID=" + quoteID + ", custName=" + custName + ", amount=" + amount + ", status="
-				+ status + "]";
+		return "KanbanViewModel [quoteID=" + quoteID + ", custName=" + custName + ", custaddress=" + custaddress + "]";
 	}
+	
+	
+	
+	
 }

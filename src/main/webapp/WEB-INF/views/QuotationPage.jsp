@@ -3,14 +3,18 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="th"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Quote Form</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+	integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- Link to external CSS file -->
 <style>
 body {
@@ -55,63 +59,14 @@ input[readonly] {
 }
 
 .form-group {
+	margin-top: 10px; display : flex;
+	margin-bottom: 10px;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.form-gro… [ 1:13 pm , 01/10/2024] manishrpatil17: /* quote_form.css */
-        
-        body {
-	font-family: Arial, sans-serif;
-	background-color: #f8f9fa;
-	padding: 20px;
-}
-
-h2 {
-	text-align: center;
-	color: #007bff;
-}
-
-form {
-	width: 80%;
-	margin: 0 auto;
-	background-color: white;
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-label {
-	font-weight: bold;
-	margin-top: 10px;
-	display: block;
-}
-
-input, select {
-	width: 100%;
-	padding: 10px;
-	margin-top: 5px;
-	margin-bottom: 15px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	font-size: 16px;
-}
-
-input[readonly] {
-	background-color: #e9ecef;
-	cursor: not-allowed;
-}
-
-.form-group {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 }
 
 .form-group div {
 	flex: 1;
-	padding: 10px;
+	padding-right: 20px;
 }
 
 .form-group div:first-child {
@@ -122,6 +77,7 @@ input[readonly] {
 	width: 100%;
 	margin-top: 20px;
 	border-collapse: collapse;
+	margin-bottom: 15px;
 }
 
 .table th, .table td {
@@ -144,8 +100,14 @@ input[readonly] {
 	font-size: 16px;
 }
 
-.btn:hover {
-	background-color: #218838;
+.btn1:hover {
+	color: blue;
+	color: highlight;
+	cursor: pointer;
+}
+
+.btn1 {
+	color: blue;
 }
 
 .subtotal, .grand-total, .discount {
@@ -163,7 +125,6 @@ header {
 	align-items: center;
 	border-radius: 8px;
 	margin-bottom: 20px;
-	width: 80%;
 }
 
 header h1 {
@@ -191,41 +152,51 @@ nav ul li a {
 nav ul li a:hover {
 	background-color: rgba(255, 255, 255, 0.2);
 }
+
+.flex-container {
+	display: flex;
+}
+
+.flex-item {
+	width: 48%;
+}
 </style>
 </head>
 
 <body>
 
-	<header>
-		<h1>Quotation Form</h1>
-		<nav>
-			<ul>
-				<li><a href="dashBoard">Dashboard</a></li>
-				<li><a href="kanbanView">Kanban View</a></li>
 
-			</ul>
-		</nav>
-	</header>
 
-	<form:form action="submitQuote" method="POST" modelAttribute="quoteForm">
-		<!-- Status (Always Draft and Read-Only) -->
-		<label for="status">Status:</label> <input type="text" id="status"
-			name="status" value="Draft" readonly>
+	<form:form action="submitQuote" method="POST"
+		modelAttribute="quoteForm">
+		<div style="display: flex;"> <a style="padding-top: 16px; padding-right: 10px; font-size: 30px;" href="kanbanView"><i class="fa-solid fa-arrow-left"></i></a>
+		<h2 style="color:black;">Quotation</h2></div>
+		<hr style="border: 1px solid #000; width: 100%; margin-top: 10px;">
+		<!-- Row for Customer and Status -->
+		<div class="flex-container">
+			<div class="flex-item" style="margin-right: 20px;">
+				<label for="customer">Customer:</label> <select id="customer"
+					name="customer">
+					<option selected="selected">Select Customer</option>
+					<c:forEach var="cust" items="${customers}">
+						<option value="${cust.custID}">${cust.custName}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="flex-item">
+				<label for="status">Status:</label> <input type="text" id="status"
+					name="status" value="Draft" readonly>
+			</div>
+		</div>
 
-		<!-- Quote Date (Current Date and Read-Only) -->
-		<label for="quoteDate">Quote Date:</label> <input type="date"
-			id="quoteDate" name="quoteDate" readonly>
-
-		<!-- Customer Selection -->
-		<label for="customer">Customer:</label> <select id="customer"
-			name="customer">
-			<option selected="selected">Select Customer</option>
-			<c:forEach var="cust" items="${customers}">
-				<option value="${cust.custID}">${cust.custName}</option>
-
-			</c:forEach>
-
-		</select>
+		<!-- Quote Date (below status) -->
+		<div class="flex-container1" style="display: flex; margin-top: 10px;">
+			<div class="flex-item" style="margin-right: 20px;"></div>
+			<div class="flex-item">
+				<label for="quoteDate">Quote Date:</label> <input type="date"
+					id="quoteDate" name="quoteDate" readonly>
+			</div>
+		</div>
 
 		<!-- Product Details Subform -->
 		<h3>Products</h3>
@@ -243,35 +214,32 @@ nav ul li a:hover {
 				<tr>
 					<td><select name="product[]" class="product-select"
 						onchange="updateRate(this)">
-							<!-- Loop through the list of products -->
 							<option selected="selected">Select</option>
 							<c:forEach var="product" items="${products}">
 								<option value="${product.proID}"
 									data-price="${product.proPrice}">${product.proName}</option>
 							</c:forEach>
 					</select></td>
-					<td><input type="number" name="qty[]" value="1" class="qty"></td>
-					<td><input type="number" name="rate[]" class="rate" readonly></td>
+					<td><input type="number" name="qty[]" value="1" class="qty"
+						style="width: 100px;"></td>
+					<td><input type="number" name="rate[]" class="rate" readonly
+						style="width: 250px;"></td>
 					<td><input type="number" name="amount[]" class="amount"
-						readonly></td>
-					<td><button type="button" class="btn remove-btn">Remove</button></td>
+						readonly style="width: 250px;"></td>
+					<td><button type="button" class="btn remove-btn" style="color:red; background-color: white; "><i  class="fa-solid fa-xmark"></i></button></td>
 				</tr>
 			</tbody>
-
 		</table>
-		<button type="button" class="btn" id="addProductBtn">Add
-			Product</button>
+
+		<a id="addProductBtn" class="btn1">+ Add New</a>
 
 		<!-- Calculations -->
-		<div class="form-group">
+		<div class="form-group" style="display: flex; flex-direction: column;">
 			<div>
 				<label for="subtotal" class="subtotal">Subtotal:</label> <input
 					type="number" id="subtotal" name="subtotal" value="0" readonly>
 			</div>
-		</div>
 
-		<!-- Discount Field (Moved below Subtotal) -->
-		<div class="form-group">
 			<div>
 				<label for="discount" class="discount">Discount (%):</label> <input
 					type="number" id="discount" name="discount" value="0">
@@ -282,10 +250,16 @@ nav ul li a:hover {
 			</div>
 		</div>
 
-		<!-- Submit Button -->
-		<button type="submit" class="btn">Submit Quote</button>
-	</form:form>
+		<!-- Discount Field (Moved below Subtotal) -->
+		<div class="form-group"></div>
 
+		<!-- Submit Button -->
+		<div style="display: flex;">
+			<button type="submit" class="btn">Submit</button>
+			<a class="btn" href="goForQuote"
+				style="text-decoration: none; margin-left: 10px; background-color: gray;">Reset</a>
+		</div>
+	</form:form>
 	<!-- JS to handle dynamic calculations -->
 	<script> 
         document.addEventListener('DOMContentLoaded', function() {
@@ -330,16 +304,17 @@ nav ul li a:hover {
                     <td>
                         <select name="product[]" class="product-select" onchange="updateRate(this)">
                             <!-- Loop through the list of products -->
+                            <option selected="selected">Select</option>
                             <c:forEach var="product" items="${products}">
                                 <option value="${product.proID}" data-price="${product.proPrice}">${product.proName}</option>
                             </c:forEach>
                         </select>
                     </td>
-                    <td><input type="number" name="qty[]" value="1" class="qty"></td>
-                    <td><input type="number" name="rate[]" class="rate" readonly></td>
-                    <td><input type="number" name="amount[]" class="amount" readonly></td>
-                    <td><button type="button" class="btn remove-btn">Remove</button></td>
-                `;
+                    <td><input type="number" name="qty[]" value="1" class="qty" style="width:100px;"></td>
+    				<td><input type="number" name="rate[]" class="rate" readonly style="width:250px;"></td>
+    				<td><input type="number" name="amount[]" class="amount" readonly style="width:250px;"></td>
+    				<td><button type="button" class="btn remove-btn" style="color:red; background-color: white; "><i  class="fa-solid fa-xmark"></i></button></td>
+    				  `;
 
                 // Attach event listeners for the new row
                 const qtyInput = newRow.querySelector('.qty');
