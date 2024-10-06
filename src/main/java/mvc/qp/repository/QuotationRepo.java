@@ -134,7 +134,7 @@ public class QuotationRepo {
 	}
 
 	public List<KanbanViewModel> getAllQuotations() {
-		String sql = "select q.quote_id,c.name,c.address from quote q inner join customer c on q.customer_id=c.id where q.status='Draft'";
+		String sql = "select q.quote_id,c.name,c.address from quote q inner join customer c on q.customer_id=c.id where q.status='Draft' order by q.quote_id desc";
 		List<KanbanViewModel> getAllQuotations = null;
 		try {
 			getAllQuotations = jdbcTemplate.query(sql, new RowMapper<KanbanViewModel>() {
@@ -156,7 +156,7 @@ public class QuotationRepo {
 	}
 
 	public List<KanbanViewModel> getAllSendQuotations() {
-		String sql = "select q.quote_id,c.name,c.address from quote q inner join customer c on q.customer_id=c.id where q.status='Send'";
+		String sql = "select q.quote_id,c.name,c.address from quote q inner join customer c on q.customer_id=c.id where q.status='Send' order by q.quote_id desc";
 		List<KanbanViewModel> getAllSentQuotations = null;
 		try {
 			getAllSentQuotations = jdbcTemplate.query(sql, new RowMapper<KanbanViewModel>() {
@@ -178,7 +178,7 @@ public class QuotationRepo {
 	}
 
 	public List<KanbanViewModel> getAllAcceptedQuotations() {
-		String sql = "select q.quote_id,c.name,c.address from quote q inner join customer c on q.customer_id=c.id where q.status='Accept'";
+		String sql = "select q.quote_id,c.name,c.address from quote q inner join customer c on q.customer_id=c.id where q.status='Accept' order by q.quote_id desc";
 		List<KanbanViewModel> getAllAcceptedQuotations = null;
 		try {
 			getAllAcceptedQuotations = jdbcTemplate.query(sql, new RowMapper<KanbanViewModel>() {
@@ -200,7 +200,7 @@ public class QuotationRepo {
 	}
 
 	public List<KanbanViewModel> getAllRejectedQuotations() {
-		String sql = "select q.quote_id,c.name,c.address from quote q inner join customer c on q.customer_id=c.id where q.status='Reject'";
+		String sql = "select q.quote_id,c.name,c.address from quote q inner join customer c on q.customer_id=c.id where q.status='Reject' order by q.quote_id desc";
 		List<KanbanViewModel> getAllRejectedQuotations = null;
 		try {
 			getAllRejectedQuotations = jdbcTemplate.query(sql, new RowMapper<KanbanViewModel>() {

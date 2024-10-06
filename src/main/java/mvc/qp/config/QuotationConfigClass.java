@@ -37,8 +37,8 @@ public class QuotationConfigClass implements WebMvcConfigurer {
 
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setUsername("root");
-		dataSource.setPassword("manish@17");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/quatation?useSSL=false&allowPublicKeyRetrieval=true");
+		dataSource.setPassword("Crwatkar4667");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/quotation?useSSL=false&allowPublicKeyRetrieval=true");
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
 		return dataSource;
